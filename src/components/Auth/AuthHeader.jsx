@@ -23,7 +23,7 @@ export default function AuthHeader({
             </h2>
             <p className="mt-5 font-normal text-center text-sm text-gray-600 iora">
             {paragraph} {' '}
-            <Link to={linkUrl} className="font-medium text-purple-600 hover:text-purple-500">
+            <Link to={linkUrl} className="font-medium text-beige-600 hover:text-beige-500">
                 {linkName}
             </Link>
             </p>
