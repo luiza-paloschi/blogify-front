@@ -23,7 +23,7 @@ export default function Login(){
         try {
             const userData = await signIn(loginState.email, loginState.password);
             setUserData(userData);
-            toast('Login realizado com sucesso!');
+            toast('Successfully logged in');
             navigate('/');
           } catch (err) {
             toast.error(err.response.data.message);
