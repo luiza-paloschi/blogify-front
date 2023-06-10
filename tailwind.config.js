@@ -12,7 +12,11 @@ export default {
           600: '#A6806A',
           700: '#826351'
         }
-      }
+      },
+      fontFamily: {
+        'open-sans': ['Open-sans', 'sans-serif'],
+        'lora': ['Lora', 'sans-serif']
+      },
     },
   },
   plugins: [],
