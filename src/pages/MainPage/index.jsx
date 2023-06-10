@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import Layout from "../../components/Layout";
+import Branding from "../../components/Main/Branding";
 
 export default function MainPage(){
     const navigate = useNavigate();
     return (
-        <div>
-            <header>
-                <button onClick={()=> {navigate('/sign-in')}}>Login</button>
-                <button onClick={()=> {navigate('/sign-up')}}>Sign-up</button>
-            </header>
-        </div>
+        <Layout>
+            <Branding />
+        </Layout>
     );
 }
