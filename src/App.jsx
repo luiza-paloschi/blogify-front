@@ -12,6 +12,7 @@ import SignUpPage from './pages/SignUpPage';
 import { UserProvider } from './contexts/UserContext';
 import useToken from './hooks/useToken';
 import WriteArticlePage from './pages/WriteArticlePage';
+import ArticlePage from './pages/ArticlePage';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
               element={<ProtectedRouteGuard> <WriteArticlePage /> </ProtectedRouteGuard>} />
               <Route path='/sign-in' element={<LoginPage />} />
               <Route path='/sign-up' element={<SignUpPage />} />
+              <Route path='/article/:slug' element={<ArticlePage />} />
             </Routes>
           </Router>
         </UserProvider>
