@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import Branding from "../../components/Main/Branding";
+import Content from "../../components/Main/Content";
 
 export default function MainPage(){
-    const navigate = useNavigate();
     return (
         <Layout>
             <Branding />
+            <Content />
         </Layout>
     );
 }
