@@ -9,8 +9,13 @@ export async function postArticle(body, token) {
   return response.data;
 }
 
+export async function getUserArticles(userId) {
+  const response = await api.get(`/articles/user/${userId}`);
+  return response.data;
+}
+
 export async function getArticles() {
-    const response = await api.get('/articles');
+    const response = await api.get('/articles/recent');
     return response.data;
 }
 

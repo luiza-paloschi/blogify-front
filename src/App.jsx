@@ -13,6 +13,7 @@ import { UserProvider } from './contexts/UserContext';
 import useToken from './hooks/useToken';
 import WriteArticlePage from './pages/WriteArticlePage';
 import ArticlePage from './pages/ArticlePage';
+import MyPage from './pages/MyPage';
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
               <Route path="/" element={<MainPage />}/>
               <Route path='/write' 
               element={<ProtectedRouteGuard> <WriteArticlePage /> </ProtectedRouteGuard>} />
+               <Route path='/me' 
+              element={<ProtectedRouteGuard> <MyPage /> </ProtectedRouteGuard>} />
               <Route path='/sign-in' element={<LoginPage />} />
               <Route path='/sign-up' element={<SignUpPage />} />
               <Route path='/article/:slug' element={<ArticlePage />} />

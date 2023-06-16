@@ -1,9 +1,11 @@
 import { useContext, useState } from 'react';
 import logo from '../../assets/quill.svg'
 import UserContext from '../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar(){
     const [navOpen, setNavOpen] = useState(false);
+	const navigate = useNavigate();
 	const { userData } = useContext(UserContext);
 
     return (
@@ -27,7 +29,7 @@ export default function NavBar(){
             <li className="text-gray-300"></li>
 			<li><a className="text-base text-black hover:text-gray-500 font-open-sans" href="#">CATEGORIES</a></li>
 		</ul>
-		{userData?.user ? <p className='hidden lg:inline-block lg:ml-auto text-base text-black text-bold font-lora'>{userData.user.username}</p> : 
+		{userData?.user ? <p onClick={()=> navigate('/me')} className='hidden cursor-pointer lg:inline-block lg:ml-auto text-base text-black text-bold font-lora'>{userData.user.username}</p> : 
 			<>
 				<a className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 hover:text-beige-600 hover:border-beige-600 text-sm text-beige-700 font-bold transition duration-200 border-solid border border-beige-700" href="/sign-in">SIGN IN</a>
 		<a className="hidden lg:inline-block py-2 px-6 bg-beige-700 hover:bg-beige-600 text-sm text-white font-bold transition duration-200" href="/sign-up">SIGN-UP</a>
