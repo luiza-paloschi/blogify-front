@@ -4,11 +4,15 @@ import UserContext from "../contexts/UserContext";
 import useUserArticles from "../hooks/api/useUserArticles";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
+import useDeleteArticle from "../hooks/api/useDeleteArticle";
 
 export default function MyPage(){
     const [articles, setArticles] = useState([]);
+    const [refresh, setRefresh] = useState(false);
     const { userData } = useContext(UserContext);
     const { getUserArticles } = useUserArticles();
+    const { deleteArticle } = useDeleteArticle();
     const navigate = useNavigate();
 
     async function fetchArticles(userId){
@@ -20,6 +24,17 @@ export default function MyPage(){
       }
     }
 
+    async function deleteUserArticle (articleId){
+      try {
+        await deleteArticle(articleId);
+        setRefresh(!refresh);
+        toast("Article deleted with sucess!")
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to delete the article!")
+      }
+    }
+
     function selectArticle(articleTitle, articleId){
       const articlePath = articleTitle.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-')
       navigate(`/article/${articlePath}`, {state: {articleId: articleId}});
@@ -27,7 +42,7 @@ export default function MyPage(){
 
     useEffect(() => {
         fetchArticles(userData.user.id);
-    },[])
+    },[refresh])
 
     return (
         <Layout>
@@ -43,7 +58,7 @@ export default function MyPage(){
                     <h2 onClick={()=>selectArticle(article.title, article.id)} className="text-2xl font-open-sans font-bold mb-2 cursor-pointer hover:text-beige-500">{article.title}</h2>
                     <p className="text-sm font-open-sans text-gray-600 mb-2">Published on: {dayjs(article.createdAt).format('DD/MM/YYYY')}</p>
                 </div>
-                <button className="px-4 py-2 max-h-11 bg-beige-700 hover:bg-beige-500 transition-colors duration-500 ease-in-out text-white rounded-lg">Delete</button>
+                <button onClick={()=> deleteUserArticle(article.id)} className="px-4 py-2 max-h-11 bg-beige-700 hover:bg-beige-500 transition-colors duration-500 ease-in-out text-white rounded-lg">Delete</button>
               </li>
             ))}
           </ul>

@@ -9,6 +9,15 @@ export async function postArticle(body, token) {
   return response.data;
 }
 
+export async function deleteArticle(articleId, token) {
+  const response = await api.delete(`/articles/delete/${articleId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  return response.data;
+}
+
 export async function getUserArticles(userId) {
   const response = await api.get(`/articles/user/${userId}`);
   return response.data;
