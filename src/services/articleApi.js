@@ -28,6 +28,16 @@ export async function getArticles() {
     return response.data;
 }
 
+export async function getAllArticles(currentPage) {
+  const response = await api.get('/articles/all', {
+    params: {
+      page: currentPage,
+    },
+  });
+  
+  return response.data;
+}
+
 export async function getArticleById(articleId) {
   const response = await api.get(`/articles/${articleId}`);
   return response.data;

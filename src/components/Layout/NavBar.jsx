@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import logo from '../../assets/quill.svg'
 import UserContext from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+//
 
 export default function NavBar(){
     const [navOpen, setNavOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function NavBar(){
 		<ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
 			<li><a className="text-base text-black hover:text-gray-500 font-open-sans" href="/">HOME</a></li>
 			<li className="text-gray-300"></li>
-			<li><a className="text-base text-black hover:text-gray-500 font-open-sans" href="#">ALL</a></li>
+			<li><a className="text-base text-black hover:text-gray-500 font-open-sans" href="/all">ALL</a></li>
             <li className="text-gray-300"></li>
 			<li><a className="text-base text-black hover:text-gray-500 font-open-sans" href="#">CATEGORIES</a></li>
 		</ul>
@@ -37,9 +38,9 @@ export default function NavBar(){
 		}
 		
 	</nav>
-	<div className={`navbar-menu relative z-50 ${navOpen ? '' : 'hidden'}`}>
-		<div onClick={()=> setNavOpen(!navOpen)} className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-		<nav className={"fixed top-0 right-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto"}>
+	<div className={`navbar-menu z-50 relative ${navOpen ? '' : 'hidden'}`}>
+		<div onClick={()=> setNavOpen(!navOpen)} className={`navbar-backdrop fixed inset-0 bg-gray-800 opacity-25`}></div>
+		<nav className={`fixed top-0 right-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto ease-in-out duration-1000 ${navOpen ? "translate-x-0 " : "translate-x-full"}`}>
 			<div className="flex items-center mb-8">
 				<a className="mr-auto text-3xl font-bold leading-none" href="#">
                     
@@ -53,27 +54,26 @@ export default function NavBar(){
 			<div>
 				<ul>
 					<li className="mb-1">
-						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Home</a>
+						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-beige-500 hover:text-white rounded" href="/">Home</a>
 					</li>
 					<li className="mb-1">
-						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">About Us</a>
+						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-beige-500 hover:text-white rounded" href="/all">All</a>
 					</li>
 					<li className="mb-1">
-						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Services</a>
+						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-beige-500 hover:text-white rounded" href="#">Categories</a>
 					</li>
-					<li className="mb-1">
-						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Pricing</a>
-					</li>
-					<li className="mb-1">
-						<a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contact</a>
-					</li>
+	
 				</ul>
 			</div>
 			<div className="mt-auto">
-				<div className="pt-6">
-					<a className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Sign in</a>
-					<a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</a>
-				</div>
+				{userData?.user ? 
+					<p className='text-base mb-4 text-center text-gray-500'>Logged in as: <span className='cursor-pointer font-lora font-semibold' onClick={()=> navigate('/me')}>{userData.user.username}</span></p>
+				: 
+					<div className="pt-6">
+						<a className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold  hover:text-beige-600 hover:border-beige-600 text-beige-700 transition duration-200 border-solid border border-beige-700" href="/sign-in">SIGN IN</a>
+						<a className="block px-4 py-3 mb-2 leading-loose text-xs text-center bg-beige-700 hover:bg-beige-600 text-white font-bold transition duration-200" href="/sign-up">SIGN UP</a>
+					</div>
+				}
 				<p className="my-4 text-xs text-center text-gray-400">
 					<span>Copyright © 2023</span>
 				</p>

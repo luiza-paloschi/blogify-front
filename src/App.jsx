@@ -14,6 +14,7 @@ import useToken from './hooks/useToken';
 import WriteArticlePage from './pages/WriteArticlePage';
 import ArticlePage from './pages/ArticlePage';
 import MyPage from './pages/MyPage';
+import AllArticlesPage from './pages/AllArticlesPage';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                <Route path='/me' 
               element={<ProtectedRouteGuard> <MyPage /> </ProtectedRouteGuard>} />
               <Route path='/sign-in' element={<LoginPage />} />
+              <Route path='/all' element={<AllArticlesPage />} />
               <Route path='/sign-up' element={<SignUpPage />} />
               <Route path='/article/:slug' element={<ArticlePage />} />
             </Routes>
