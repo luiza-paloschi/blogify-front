@@ -3,15 +3,17 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { useNavigate } from 'react-router-dom';
 dayjs.extend(relativeTime);
 
+
+
 export default function ArticleCard({article}){
     const createdAt = dayjs(article.createdAt);
     const formattedDate = createdAt.fromNow();
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
     function selectArticle(){
-       const articlePath = article.title.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-')
-        navigate(`/article/${articlePath}`, {state: {articleId: article.id}});
-    }
+        const articlePath = article.title.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-')
+         navigate(`/article/${articlePath}`, {state: {articleId: article.id}});
+     }
 
     return (
         <div className="py-3 w-full border-solid border-b-[0.8px] border-[#dedede] leading-relaxed">
