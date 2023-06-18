@@ -2,16 +2,18 @@ import { useContext, useState } from 'react';
 import logo from '../../assets/quill.svg'
 import UserContext from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
-//
+import useCategories from '../../hooks/api/useCategories';
 
 export default function NavBar(){
     const [navOpen, setNavOpen] = useState(false);
 	const navigate = useNavigate();
 	const { userData } = useContext(UserContext);
+	const { categories } = useCategories();
+	const [dropdownOpen, setDropdownOpen] = useState(false);
 
     return (
        <>
-        <nav className="relative px-5 py-4 flex justify-between items-center bg-white h-20">
+        <nav className="relative w-full px-5 py-4 flex justify-between items-center bg-white h-20">
 		<a className="text-3xl font-bold leading-none" href="/">
 			<img className='h-10' src={logo} alt="logo"></img>
 		</a>
@@ -28,8 +30,36 @@ export default function NavBar(){
 			<li className="text-gray-300"></li>
 			<li><a className="text-base text-black hover:text-gray-500 font-open-sans" href="/all">ALL</a></li>
             <li className="text-gray-300"></li>
-			<li><a className="text-base text-black hover:text-gray-500 font-open-sans" href="#">CATEGORIES</a></li>
+
+			<li className='relative'>
+				<a onMouseEnter={() => setDropdownOpen(true)} 
+				className="text-base text-black hover:text-gray-500 font-open-sans" href="#">CATEGORIES</a>
+			</li>
 		</ul>
+
+		{dropdownOpen && (
+				<div onMouseLeave={() => setDropdownOpen(false)} 
+				className="hidden md:block absolute top-11 left-1/2 transform -translate-x-1/2 py-2 mt-2 bg-white rounded shadow-lg max-w-screen-md w-full">
+					<div className="md:flex md:flex-wrap">
+						{/* Mapeie as categorias disponíveis aqui */}
+						{categories.map((category) => (
+						<div key={category.id} className="w-1/2 md:w-1/4">
+							<a
+							className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-200"
+							href={`/category/${category.id}`}
+							>
+							{category.name}
+							</a>
+						</div>
+						))}
+					</div>
+				</div>
+			)}
+		
+
+
+
+
 		{userData?.user ? <p onClick={()=> navigate('/me')} className='hidden cursor-pointer lg:inline-block lg:ml-auto text-base text-black text-bold font-lora'>{userData.user.username}</p> : 
 			<>
 				<a className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 hover:text-beige-600 hover:border-beige-600 text-sm text-beige-700 font-bold transition duration-200 border-solid border border-beige-700" href="/sign-in">SIGN IN</a>
@@ -81,7 +111,5 @@ export default function NavBar(){
 		</nav>
 	</div>
        </>
-
-
     );
 }
