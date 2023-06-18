@@ -6,10 +6,12 @@ export default function WriteArticlePage(){
 
     return (
         <Layout>
-            <Heading>
-                <Title>Write an article</Title>
-            </Heading>
-            <WriteForm />
+            <div className='max-w-5xl w-full px-4 flex flex-col items-center'>
+                <Heading>
+                    <Title>Write an article</Title>
+                </Heading>
+                <WriteForm />
+            </div>
         </Layout>
     );
 }
@@ -22,8 +24,6 @@ const Heading = styled.div`
         margin: 0px;
         padding: 0px;
         font-family: "Lora", sans-serif;
-        font-weight: 300;
-        font-size: 40px;
         color: #080808;
         -webkit-transition: all 0.4s ease 0s;
         -o-transition: all 0.4s ease 0s;
@@ -38,12 +38,12 @@ const Heading = styled.div`
 const Title = styled.h1`
         text-align: center;
         word-break: break-word;
-        font-size:30px; font-weight:300; color:#222; letter-spacing:1px;
+        font-size:2.5rem; font-weight:300; color:#222; letter-spacing:1px;
         text-transform: uppercase;
         display: flex;
         column-gap: 27px;
         align-items: center;
-        &::after {
+        &::after, &::before {
             content: " ";
             width:100px;
             display: block;
@@ -51,21 +51,11 @@ const Title = styled.h1`
             border-top: 1px solid #c50000;
             height: 5px;
             background-color:#f8f8f8;
-            @media screen {
-                display: hidden;
-            }
-        }
-        &::before{
-            content: " ";
             @media (max-width: 500px) {
-                display: hidden;
+                width: 0px;
             }
-            width:100px;
-            display: block;
-            border-bottom: 1px solid #c50000;
-            border-top: 1px solid #c50000;
-            height: 5px;
-            background-color:#f8f8f8;
         }
-
+        @media (max-width: 500px) {
+            font-size: 2rem
+        }
 `
