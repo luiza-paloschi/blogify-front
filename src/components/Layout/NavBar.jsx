@@ -2,13 +2,13 @@ import { useContext, useState } from 'react';
 import logo from '../../assets/quill.svg'
 import UserContext from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
-import useCategories from '../../hooks/api/useCategories';
+import CategoryContext from '../../contexts/CategoryContext';
 
 export default function NavBar(){
     const [navOpen, setNavOpen] = useState(false);
 	const navigate = useNavigate();
 	const { userData } = useContext(UserContext);
-	const { categories } = useCategories();
+	const { categories } = useContext(CategoryContext);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 
     return (
@@ -41,8 +41,7 @@ export default function NavBar(){
 				<div onMouseLeave={() => setDropdownOpen(false)} 
 				className="hidden md:block absolute top-11 left-1/2 transform -translate-x-1/2 py-2 mt-2 bg-white rounded shadow-lg max-w-screen-md w-full">
 					<div className="md:flex md:flex-wrap">
-						{/* Mapeie as categorias disponíveis aqui */}
-						{categories.map((category) => (
+						{categories?.map((category) => (
 						<div key={category.id} className="w-1/2 md:w-1/4">
 							<a
 							className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-200"

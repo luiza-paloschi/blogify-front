@@ -42,3 +42,12 @@ export async function getArticleById(articleId) {
   const response = await api.get(`/articles/${articleId}`);
   return response.data;
 }
+
+export async function getByCategoryId(categoryId, currentPage) {
+  const response = await api.get(`/articles/category/${categoryId}`, {
+    params: {
+      page: currentPage,
+    },
+  });
+  return response.data;
+}

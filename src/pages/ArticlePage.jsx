@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import useSelectedArticle from "../hooks/api/useSelectedArticle";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ dayjs.extend(localizedFormat)
 
 export default function ArticlePage(){
     const location = useLocation();
+    const { articleId } = useParams();
     const [article, setArticle] = useState(null);
     const { selectedArticle } = useSelectedArticle();
     
@@ -16,7 +17,7 @@ export default function ArticlePage(){
     useEffect( ()=> {
         //location.state.articleId
         async function fetch(){
-            const article = await selectedArticle(location.state.articleId);
+            const article = await selectedArticle(articleId);
             setArticle(article);
         }
         fetch();

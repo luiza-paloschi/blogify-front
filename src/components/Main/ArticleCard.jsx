@@ -11,8 +11,7 @@ export default function ArticleCard({article}){
     const navigate = useNavigate();
 
     function selectArticle(){
-        const articlePath = article.title.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-')
-         navigate(`/article/${articlePath}`, {state: {articleId: article.id}});
+         navigate(`/article/${article.id}`, {state: {articleId: article.id}});
      }
 
     return (
