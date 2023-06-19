@@ -15,6 +15,8 @@ import WriteArticlePage from './pages/WriteArticlePage';
 import ArticlePage from './pages/ArticlePage';
 import MyPage from './pages/MyPage';
 import AllArticlesPage from './pages/AllArticlesPage';
+import { CategoryProvider } from './contexts/CategoryContext';
+import CategoryPage from './pages/CategoryPage';
 
 function App() {
 
@@ -22,6 +24,7 @@ function App() {
     <>
        <ToastContainer theme='dark'/>
        <UserProvider>
+        <CategoryProvider>
         <Router>
             <Routes>
               <Route path="/" element={<MainPage />}/>
@@ -32,9 +35,11 @@ function App() {
               <Route path='/sign-in' element={<LoginPage />} />
               <Route path='/all' element={<AllArticlesPage />} />
               <Route path='/sign-up' element={<SignUpPage />} />
-              <Route path='/article/:slug' element={<ArticlePage />} />
+              <Route path='/article/:articleId' element={<ArticlePage />} />
+              <Route path='/category/:categoryId' element={<CategoryPage />} />
             </Routes>
           </Router>
+          </CategoryProvider>
         </UserProvider>
     </>
     
